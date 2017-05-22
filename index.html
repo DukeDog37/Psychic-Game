@@ -1,0 +1,128 @@
+<head>
+  <meta charset="UTF-8">
+  <title>JAH - Psychic Game - Homework 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- Custom CSS for overrides as needed -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/javascript/game.js"></script>
+  
+</head>
+	<!-- Will be moving all this to .js file once tested -->
+	<script type="text/javascript">
+		//Have computer pick random character from alphabet array and hold in variable
+		var strPsychicChoice = strRandomLetter();
+		console.log("Phychic Choice " + strPsychicChoice);
+		//initialize counts for game
+		var roundScore = 0;
+		var wins = 0;
+		var losses = 0;
+		var guesses = 0;
+		var remaining = 10;
+		
+		//Catch user key press event and store result in variable
+		document.onkeyup = function(event) {
+
+				remaining--;
+				guesses++;
+				if(remaining > 0 && roundScore < 1){
+				        // Determine which key was pressed
+				        var userGuess = event.key;
+				        console.log("Users Guess " + userGuess);
+				        //Check to make sure the user selected a character from the alphabet
+				        var boolValid = fnIsValidChoice(userGuess);
+				        if(boolValid == true){
+				        		console.log("VALID");
+						        //compare the user choice to the computer choice
+						        if(userGuess === strPsychicChoice){
+						        	//rack up a win
+						        	console.log("win");
+						        	wins++;
+						        	roundScore = 1;
+						        	//generate a new Psychic letter choice
+									strPsychicChoice = strRandomLetter();
+									console.log("Phychic Choice " + strPsychicChoice);
+									//reset remaining guess count
+									remaining = 10;
+									var remainingText = document.getElementById('Remain')
+						          	remainingText.textContent = remaining
+						        }
+						        else{
+						        	//rack up a loss
+						        	console.log("loss");
+						        	losses++;
+						        }
+						        // Update the values on page with new scores
+						          var winsText = document.getElementById('Wins')
+						          winsText.textContent = wins
+						          var lossesText = document.getElementById('Losses')
+						          lossesText.textContent = losses
+						          var remainingText = document.getElementById('Remain')
+						          remainingText.textContent = remaining
+						          var totalGuesses = document.getElementById('SoFar')
+						          totalGuesses.textContent = guesses
+				     	}
+				     	else{
+				     		alert("You should only be choosing letters of the alphabet !");
+				     		
+				     	}
+				     }else if(remaining > 0 && roundScore > 0){
+
+				     	//need to reset the number of choices back to 10
+				     	remaining = 10;
+				     	roundScore = 0;
+				     	var remainingText = document.getElementById('Remain')
+						          remainingText.textContent = remaining
+						var totalGuesses = document.getElementById('SoFar')
+						          totalGuesses.textContent = roundScore
+						
+				     	
+				     }
+				     else{
+				     	alert("You ran out of guesses; try again!");
+				     	//reset guesses remainging so user can keep going
+				     	remaining = 10;
+				     	roundScore = 0;
+				     	var remainingText = document.getElementById('Remain')
+						          remainingText.textContent = remaining
+						var totalGuesses = document.getElementById('SoFar')
+						          totalGuesses.textContent = roundScore
+
+				     }
+		 };
+
+
+	</script>
+<body>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Psychic Game</h1> 
+    <img src="assets/images/images.jpg"> 
+    <p>See if you can guess the correct letter</p>
+
+  </div>
+  	<h2>Wins: <span id="Wins">0</span></h2>
+
+  	<h2>Losses: <span id="Losses">0</span></h2>
+
+  	<h2>Guesses Remaining: <span id="Remain">0</span></h2>
+  	
+  	<h2>Your Guesses So Far: <span id="SoFar">0</span></h2>
+
+	
+  	
+<!-- Footer object - should persist at the bottom of the page -->  	
+<footer class="footer">
+     <div class="container">
+                <span>Jason Henry - H3 - Psychic Game</span>
+     </div>
+</footer>	
+
+</div>
+
+
+
+</body>
+
+</html>
