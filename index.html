@@ -18,40 +18,37 @@
 		var roundScore = 0;
 		var wins = 0;
 		var losses = 0;
-		var guesses = 0;
-		var remaining = 10;
+		var guesses = "";
+		var remaining = 9;
 		
 		//Catch user key press event and store result in variable
 		document.onkeyup = function(event) {
-
-				remaining--;
-				guesses++;
+				
 				if(remaining > 0 && roundScore < 1){
 				        // Determine which key was pressed
 				        var userGuess = event.key;
-				        console.log("Users Guess " + userGuess);
 				        //Check to make sure the user selected a character from the alphabet
 				        var boolValid = fnIsValidChoice(userGuess);
 				        if(boolValid == true){
-				        		console.log("VALID");
-						        //compare the user choice to the computer choice
+				        		//compare the user choice to the computer choice
 						        if(userGuess === strPsychicChoice){
 						        	//rack up a win
-						        	console.log("win");
 						        	wins++;
 						        	roundScore = 1;
 						        	//generate a new Psychic letter choice
 									strPsychicChoice = strRandomLetter();
 									console.log("Phychic Choice " + strPsychicChoice);
 									//reset remaining guess count
-									remaining = 10;
+									remaining = 9;
 									var remainingText = document.getElementById('Remain')
 						          	remainingText.textContent = remaining
+						          	guesses = guesses + ", " + userGuess;
 						        }
 						        else{
 						        	//rack up a loss
-						        	console.log("loss");
 						        	losses++;
+						        	remaining--; // take one away from the number of guesses remaining
+						        	guesses = guesses + ", " + userGuess;
 						        }
 						        // Update the values on page with new scores
 						          var winsText = document.getElementById('Wins')
@@ -60,34 +57,37 @@
 						          lossesText.textContent = losses
 						          var remainingText = document.getElementById('Remain')
 						          remainingText.textContent = remaining
-						          var totalGuesses = document.getElementById('SoFar')
-						          totalGuesses.textContent = guesses
+						          var strGuesses = document.getElementById('SoFar')
+						          strGuesses.textContent = guesses
 				     	}
 				     	else{
 				     		alert("You should only be choosing letters of the alphabet !");
-				     		
+				     		guesses = guesses + ", " + userGuess;
+				     		remaining--;//take one away from the number of guesses remaining - even if they chose a non-alphabet character
 				     	}
 				     }else if(remaining > 0 && roundScore > 0){
 
 				     	//need to reset the number of choices back to 10
-				     	remaining = 10;
+				     	remaining = 9;
 				     	roundScore = 0;
+				     	guesses = "";
 				     	var remainingText = document.getElementById('Remain')
 						          remainingText.textContent = remaining
 						var totalGuesses = document.getElementById('SoFar')
-						          totalGuesses.textContent = roundScore
+						          totalGuesses.textContent = guesses
 						
 				     	
 				     }
-				     else{
+				else{
 				     	alert("You ran out of guesses; try again!");
 				     	//reset guesses remainging so user can keep going
-				     	remaining = 10;
+				     	remaining = 9;
 				     	roundScore = 0;
+				     	guesses = "";
 				     	var remainingText = document.getElementById('Remain')
 						          remainingText.textContent = remaining
 						var totalGuesses = document.getElementById('SoFar')
-						          totalGuesses.textContent = roundScore
+						          totalGuesses.textContent = guesses
 
 				     }
 		 };
@@ -106,9 +106,9 @@
 
   	<h2>Losses: <span id="Losses">0</span></h2>
 
-  	<h2>Guesses Remaining: <span id="Remain">0</span></h2>
+  	<h2>Guesses Remaining: <span id="Remain">9</span></h2>
   	
-  	<h2>Your Guesses So Far: <span id="SoFar">0</span></h2>
+  	<h2>Your Guesses So Far: <span id="SoFar"></span></h2>
 
 	
   	
