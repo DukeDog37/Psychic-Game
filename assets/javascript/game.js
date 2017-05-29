@@ -23,3 +23,13 @@ function fnIsValidChoice(chrUserChoice){
     	}
 	}
 }
+//This function is used to update the document elements with the correct values as the game is played.
+function fnUpdateDocument(wins, losses, remaining, guesses){
+	document.getElementById('Wins').textContent = wins;
+	document.getElementById('Losses').textContent = losses;
+	document.getElementById('Remain').textContent = remaining;
+	document.getElementById('SoFar').textContent = guesses;
+
+
+}
+

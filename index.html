@@ -40,42 +40,39 @@
 									console.log("Phychic Choice " + strPsychicChoice);
 									//reset remaining guess count
 									remaining = 9;
-									var remainingText = document.getElementById('Remain')
-						          	remainingText.textContent = remaining
-						          	guesses = guesses + ", " + userGuess;
+									guesses = "";
+									fnUpdateDocument(wins, losses, remaining, guesses);
+									
 						        }
 						        else{
 						        	//rack up a loss
 						        	losses++;
 						        	remaining--; // take one away from the number of guesses remaining
-						        	guesses = guesses + ", " + userGuess;
+						        	console.log("length of guesses " + guesses.length);
+						        	//Eliminates the comma if its the users first guess
+						        	if(guesses.length > 0){
+						        		guesses = guesses + ", " + userGuess;
+						        	}else{
+						        		guesses = userGuess;
+						        	}
+						        	
 						        }
 						        // Update the values on page with new scores
-						          var winsText = document.getElementById('Wins')
-						          winsText.textContent = wins
-						          var lossesText = document.getElementById('Losses')
-						          lossesText.textContent = losses
-						          var remainingText = document.getElementById('Remain')
-						          remainingText.textContent = remaining
-						          var strGuesses = document.getElementById('SoFar')
-						          strGuesses.textContent = guesses
+						        fnUpdateDocument(wins, losses, remaining, guesses);
+						        	
 				     	}
 				     	else{
 				     		alert("You should only be choosing letters of the alphabet !");
-				     		guesses = guesses + ", " + userGuess;
-				     		remaining--;//take one away from the number of guesses remaining - even if they chose a non-alphabet character
+				     		
 				     	}
 				     }else if(remaining > 0 && roundScore > 0){
 
-				     	//need to reset the number of choices back to 10
+				     	//need to reset the number of choices back to 9
 				     	remaining = 9;
 				     	roundScore = 0;
 				     	guesses = "";
-				     	var remainingText = document.getElementById('Remain')
-						          remainingText.textContent = remaining
-						var totalGuesses = document.getElementById('SoFar')
-						          totalGuesses.textContent = guesses
-						
+				     	fnUpdateDocument(wins, losses, remaining, guesses);
+				     					
 				     	
 				     }
 				else{
@@ -84,10 +81,9 @@
 				     	remaining = 9;
 				     	roundScore = 0;
 				     	guesses = "";
-				     	var remainingText = document.getElementById('Remain')
-						          remainingText.textContent = remaining
-						var totalGuesses = document.getElementById('SoFar')
-						          totalGuesses.textContent = guesses
+				     	
+				     	fnUpdateDocument(wins, losses, remaining, guesses);
+				     	
 
 				     }
 		 };
@@ -95,34 +91,26 @@
 
 	</script>
 <body>
-<div class="container">
-  <div class="jumbotron">
-    <h1>Psychic Game</h1> 
-    <img src="assets/images/images.jpg"> 
-    <p>See if you can guess the correct letter</p>
+	<div class="container">
+		  <div class="jumbotron">
+		    <h1>Psychic Game</h1> 
+		    <img src="assets/images/images.jpg"> 
+		    <p>See if you can guess the correct letter; Please choose only characters a-z.</p>
+			<h2>Wins: <span id="Wins">0</span></h2>
+	  		<h2>Losses: <span id="Losses">0</span></h2>
+			<h2>Guesses Remaining: <span id="Remain">9</span></h2>
+			<h2>Your Guesses So Far: <span id="SoFar"></span></h2>
 
-  </div>
-  	<h2>Wins: <span id="Wins">0</span></h2>
+		  </div>
+	 	
+	<!-- Footer object - should persist at the bottom of the page -->  	
+			<footer class="footer">
+			     <div class="container">
+			                <span>Jason Henry - H3 - Psychic Game</span>
+			     </div>
+			</footer>	
 
-  	<h2>Losses: <span id="Losses">0</span></h2>
-
-  	<h2>Guesses Remaining: <span id="Remain">9</span></h2>
-  	
-  	<h2>Your Guesses So Far: <span id="SoFar"></span></h2>
-
-	
-  	
-<!-- Footer object - should persist at the bottom of the page -->  	
-<footer class="footer">
-     <div class="container">
-                <span>Jason Henry - H3 - Psychic Game</span>
-     </div>
-</footer>	
-
-</div>
-
-
-
+	</div>
 </body>
 
 </html>
