@@ -6,10 +6,9 @@ function strRandomLetter(){
 			var getRandomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
 			var randomLetter = getRandomLetter;
 
-			console.log(randomLetter);
 			return randomLetter;
 }
-
+//This function takes users selected key value and determines if it is valid (a - z)
 function fnIsValidChoice(chrUserChoice){
 
 	var strUserPick = chrUserChoice;
@@ -18,7 +17,6 @@ function fnIsValidChoice(chrUserChoice){
 	for(var i = 0; i < alphabet.length; i++)
 	{
     	if(alphabet[i].indexOf(strUserPick) != -1){
-        console.log(strUserPick);
         return true;
     	}
 	}

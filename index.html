@@ -13,7 +13,6 @@
 	<script type="text/javascript">
 		//Have computer pick random character from alphabet array and hold in variable
 		var strPsychicChoice = strRandomLetter();
-		console.log("Phychic Choice " + strPsychicChoice);
 		//initialize counts for game
 		var roundScore = 0;
 		var wins = 0;
@@ -37,7 +36,6 @@
 						        	roundScore = 1;
 						        	//generate a new Psychic letter choice
 									strPsychicChoice = strRandomLetter();
-									console.log("Phychic Choice " + strPsychicChoice);
 									//reset remaining guess count
 									remaining = 9;
 									guesses = "";
@@ -48,7 +46,6 @@
 						        	//rack up a loss
 						        	losses++;
 						        	remaining--; // take one away from the number of guesses remaining
-						        	console.log("length of guesses " + guesses.length);
 						        	//Eliminates the comma if its the users first guess
 						        	if(guesses.length > 0){
 						        		guesses = guesses + ", " + userGuess;
